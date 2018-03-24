@@ -1,0 +1,193 @@
+import sys
+'''
+Section 1: Collect customer input
+'''
+#x = input('What is your name? ')
+#print('')
+#print 'Hello ' + x
+
+#1)	Request Rental code:
+#Prompt --> "(B)udget, (D)aily, or (W)eekly rental?"
+#rentalCode = ?
+#print('')
+#print('(B)udget, (D)aily, or (W)eekly rental?')
+#print('Number of Days Rented:')
+#daysRented = input('Number of Days Rented:')
+#RentalCode = input('What kind of rental are you looking for: ')
+
+B = 'Budget'
+D = 'Daily'
+W = 'Weekly'
+
+RentalCode = input('(B)udget, (D)aily, or (W)eekly rental?\n')
+if RentalCode == 'Daily' or RentalCode == 'Budget':
+    daysRented = int(input('Number of Days Rented:\n'))
+
+else:
+    weeksRented = int(input('\nNumber of Weeks Rented: '))
+
+
+  
+#2)	Request time period the car was rented.
+
+#Prompt --> "Number of Days Rented:"
+#daysRented = ?
+#	OR
+#Prompt --> "Number of Weeks Rented:"
+#weeksRented = ?
+#CUSTOMER DATA CHECK 1
+#ADD CODE HERE TO PRINT:
+#rentalCode
+#daysRented
+
+#if RentalCode == 'Budget' or RentalCode == 'budget' or RentalCode == 'Daily' or RentalCode == 'daily':
+#  daysRented = raw_input('How many days will you be renting the car for?')
+
+#else:
+#  daysRented = raw_input('How many weeks will you be renting the car for?')
+
+#print('')
+#print('Here is what I have so far.')
+#print ('Your Name is ' + x)
+#print ('The type of rental you are looking for is a ' + RentalCode + ' rental')
+#print ('You plan on renting for ' + daysRented + ' days')
+#print('')
+
+#y = raw_input('Do I have the correct information so far? ')
+
+
+
+#3) Set the base charge for the rental type as the variable baseCharge. 
+#The base charge is the rental period * the appropriate rate:
+
+budget_charge = 40.00
+daily_charge = 60.00
+weekly_charge = 190.00
+
+#if y == 'Yes' or y == 'yes':
+#  sum= int(budget_charge * daysRented)
+#  print int(sum)
+
+
+
+#baseCharge = ?
+if RentalCode == 'Budget':
+  baseCharge = daysRented * budget_charge
+  
+elif RentalCode == 'Daily':
+  baseCharge = daysRented * daily_charge
+  
+else:
+  baseCharge = weeksRented * weekly_charge
+
+
+
+#4)Collect Mileage information:
+#a)	Prompt the user to input the starting odometer reading and store it as the variable odoStart
+
+#Prompt -->"Starting Odometer Reading:\n"
+# odoStart = ?
+
+odoStart = input('Starting Odometer Reading:\n')
+
+#b)	Prompt the user to input the ending odometer reading and store it as the variable odoEnd
+
+#Prompt -->"Ending Odometer Reading:"
+# odoEnd = ?
+odoEnd = input('Ending Odometer Reading:\n')
+
+
+#CUSTOMER DATA CHECK 2
+#ADD CODE HERE TO PRINT:
+#odoStart
+#odoEnd
+#baseCharge
+
+
+
+'''
+Section 2: Calculate the costs from the customer input
+'''
+
+#1)	Calculate the mileage.
+#a)	Calculate the total mileage: 
+#   ending odometer reading  - starting odometer reading 
+#   and store it as the variable totalMiles
+
+# totalMiles = ?
+totalMiles = (odoEnd - odoStart)
+
+
+#2)	 Calculate the mileage charge and store it as 
+#     the variable mileCharge:
+
+#a)	Code 'B' (budget) mileage charge: $0.25 for each mile driven
+
+if RentalCode == 'Budget':
+  mileCharge = (totalMiles * 0.25)
+  
+
+
+#b)	Code 'D' (daily) mileage charge: no charge if the average
+#   number of miles driven per day is 100 miles or less;
+#   i)	Calculate the averageDayMiles (totalMiles/daysRented)
+elif RentalCode == 'Daily':
+  averageDayMiles = (totalMiles/daysRented)
+  if averageDayMiles <= 100:
+    mileCharge = 0
+    
+  else:
+    mileCharge = (averageDayMiles - 100) * 0.25 * daysRented
+    
+#   ii)	If averageDayMiles is above the 100 mile per day
+#       limit:
+#     (1)	calculate extraMiles (averageDayMiles  - 100)
+#     (2)	mileCharge is the charge for extraMiles, 
+#         $0.25 for each mile
+
+
+#c)	Code 'W' (weekly) mileage charge: no charge if the 
+#   average number of miles driven per week is 
+#   900 miles or less;
+else:
+  if totalMiles <= 900:
+    mileCharge = ('$0.00')
+    
+
+#   i)	Calculate the averageWeekMiles (totalMiles/ weeksRented)
+  else:
+    averageWeekMiles = (totalMiles/weeksRented)
+#   ii)	mileCharge is $100.00 per week if the average number of miles driven per week exceeds 900 miles
+    mileCharge = (100.00 * weeksRented)
+    
+
+'''
+Section 3: Display the results to the customer
+'''
+#1) Calculate the Amount Due as the variable amtDue
+#   This is the base charge + mile charge
+amtDue = baseCharge + mileCharge
+
+#2. Display the results of the rental calculation:
+
+#Customer Summary
+#Rental Code: 
+#Days Rented: 
+#Starting Odometer: 
+#Ending Odometer: 
+#Miles Driven: 
+#Amount Due: 
+
+print('')
+print('')
+
+print('Rental Summary')
+print('Rental Code: ' + str(RentalCode))
+if RentalCode == 'D' or RentalCode == 'B':
+  print('Days Rented: ' + str(daysRented))
+else:
+  print('Weeks Rented: ' + str(weeksRented))
+print('Starting Odometer: ' + str(odoStart))
+print('Ending Odometer: ' + str(odoEnd))
+print('Miles Driven: ' + str(totalMiles))
+print('Amount Due: $' + str(amtDue))
